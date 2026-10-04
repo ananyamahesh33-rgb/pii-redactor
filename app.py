@@ -9,8 +9,7 @@ from redactor import redact_image
 
 st.set_page_config(page_title="PII Redactor", page_icon="🔒", layout="wide")
 st.title("🔒 PII Redactor")
-st.caption("Detects and hides Aadhaar, PAN, phone numbers, emails and more. Runs fully offline.")
-
+st.caption("Detects and hides Aadhaar, PAN, phone numbers, emails and faces. Runs fully offline.")
 uploaded = st.file_uploader("Upload an image", type=["png", "jpg", "jpeg"])
 
 if uploaded:
@@ -26,7 +25,8 @@ if uploaded:
 
     if findings:
         st.subheader(f"Found {len(findings)} sensitive item(s)")
-        git initgit initgit initst.dataframe(findings, width="stretch")
+        st.dataframe(findings, use_container_width=True)
+    else:
         st.info("No sensitive information detected.")
 
     ok, buf = cv2.imencode(".png", redacted)
