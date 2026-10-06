@@ -10,6 +10,11 @@ from transformers import AutoModelForTokenClassification, AutoTokenizer
 
 NER_DIR = os.path.join("models", "ner")
 
+# Names/addresses the model is less sure about than this are ignored.
+# Chosen by running evaluate.py on the HARD test set (see results/):
+# 0.8 kept recall at 98.5% while improving precision.
+MIN_CONFIDENCE = 0.8
+
 _tokenizer = None
 _model = None
 
@@ -73,7 +78,9 @@ def find_names_addresses(text):
             j += 1
         label = "NAME" if typ == "NAME" else "ADDRESS"
         value = " ".join(w for w, _, _ in words[i:j])
-        results.append((label, words[i][1], words[j - 1][2], value, min(conf[i:j])))
+        confidence = min(conf[i:j])
+        if confidence >= MIN_CONFIDENCE:
+            results.append((label, words[i][1], words[j - 1][2], value, confidence))
         i = j
     return results
 

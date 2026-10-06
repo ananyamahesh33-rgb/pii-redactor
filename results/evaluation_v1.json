@@ -1,0 +1,210 @@
+{
+  "easy test": {
+    "0.0": {
+      "NAME": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "ADDR": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "ALL": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      }
+    },
+    "0.5": {
+      "NAME": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "ADDR": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "ALL": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      }
+    },
+    "0.6": {
+      "NAME": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "ADDR": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "ALL": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      }
+    },
+    "0.7": {
+      "NAME": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "ADDR": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "ALL": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      }
+    },
+    "0.8": {
+      "NAME": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "ADDR": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "ALL": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      }
+    },
+    "0.9": {
+      "NAME": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "ADDR": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "ALL": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      }
+    }
+  },
+  "HARD test": {
+    "0.0": {
+      "NAME": {
+        "precision": 0.5644,
+        "recall": 0.7964,
+        "f1": 0.6606
+      },
+      "ADDR": {
+        "precision": 0.9254,
+        "recall": 1.0,
+        "f1": 0.9612
+      },
+      "ALL": {
+        "precision": 0.6571,
+        "recall": 0.8596,
+        "f1": 0.7448
+      }
+    },
+    "0.5": {
+      "NAME": {
+        "precision": 0.5644,
+        "recall": 0.7964,
+        "f1": 0.6606
+      },
+      "ADDR": {
+        "precision": 0.9254,
+        "recall": 1.0,
+        "f1": 0.9612
+      },
+      "ALL": {
+        "precision": 0.6571,
+        "recall": 0.8596,
+        "f1": 0.7448
+      }
+    },
+    "0.6": {
+      "NAME": {
+        "precision": 0.5733,
+        "recall": 0.7964,
+        "f1": 0.6667
+      },
+      "ADDR": {
+        "precision": 0.9394,
+        "recall": 1.0,
+        "f1": 0.9688
+      },
+      "ALL": {
+        "precision": 0.6673,
+        "recall": 0.8596,
+        "f1": 0.7514
+      }
+    },
+    "0.7": {
+      "NAME": {
+        "precision": 0.5752,
+        "recall": 0.7927,
+        "f1": 0.6667
+      },
+      "ADDR": {
+        "precision": 0.9394,
+        "recall": 1.0,
+        "f1": 0.9688
+      },
+      "ALL": {
+        "precision": 0.6693,
+        "recall": 0.8571,
+        "f1": 0.7516
+      }
+    },
+    "0.8": {
+      "NAME": {
+        "precision": 0.589,
+        "recall": 0.7818,
+        "f1": 0.6719
+      },
+      "ADDR": {
+        "precision": 0.9466,
+        "recall": 1.0,
+        "f1": 0.9725
+      },
+      "ALL": {
+        "precision": 0.6835,
+        "recall": 0.8496,
+        "f1": 0.7575
+      }
+    },
+    "0.9": {
+      "NAME": {
+        "precision": 0.6375,
+        "recall": 0.7673,
+        "f1": 0.6964
+      },
+      "ADDR": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "f1": 1.0
+      },
+      "ALL": {
+        "precision": 0.7363,
+        "recall": 0.8396,
+        "f1": 0.7845
+      }
+    }
+  }
+}
