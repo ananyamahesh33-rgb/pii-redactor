@@ -81,9 +81,13 @@ def span_to_box(bbox, text, start, end):
     ys = [p[1] for p in bbox]
     x1, x2, y1, y2 = min(xs), max(xs), min(ys), max(ys)
     n = max(len(text), 1)
-    sx = x1 + (x2 - x1) * start / n
-    ex = x1 + (x2 - x1) * end / n
-    return int(sx), int(y1), int(ex), int(y2)
+    char_w = (x2 - x1) / n
+    # Letters are not all the same width, so this estimate can be off by a
+    # character or two. Add a safety margin of 1.5 characters on each side:
+    # hiding slightly too much is better than leaking part of a number.
+    sx = x1 + char_w * (start - 1.5)
+    ex = x1 + char_w * (end + 1.5)
+    return int(max(sx, x1)), int(y1), int(min(ex, x2)), int(y2)
 
 
 def redact_image(image, pad=4):

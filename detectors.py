@@ -63,15 +63,48 @@ PATTERNS = {
     "AADHAAR": re.compile(r"(?<!\d)[2-9]\d{3}\s?\d{4}\s?\d{4}(?!\d)"),
     "PAN": re.compile(r"\b[A-Z]{5}\d{4}[A-Z]\b"),
     "PHONE": re.compile(r"(?<!\d)(?:\+91[\s-]?)?[6-9]\d{4}\s?\d{5}(?!\d)"),
-    "EMAIL": re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+"),
+    # OCR sometimes reads the "." before "@" as a space ("ravi kumar@..."), so we also
+    # take ONE word before the space. Hiding one extra word is safer than leaking half an email.
+    "EMAIL": re.compile(r"(?:[\w.+-]+ )?[\w.+-]+@[\w-]+\.[\w.]+"),
     "IFSC": re.compile(r"\b[A-Z]{4}0[A-Z0-9]{6}\b"),
     "DOB": re.compile(r"\b\d{2}[/-]\d{2}[/-]\d{4}\b"),
 }
 
 
+# ---------------------------------------------------------------
+# OCR-tolerant PAN detection.
+# Scanners often confuse look-alike characters, e.g. "EAPHU6756D" is read
+# as "EAPHU67S6D" (5 -> S). A PAN always has the shape
+# LLLLL DDDD L (L = letter, D = digit), so we can "repair" each character
+# based on which kind it SHOULD be, then check the strict pattern.
+# ---------------------------------------------------------------
+TO_LETTER = {"0": "O", "1": "I", "2": "Z", "5": "S", "6": "G", "8": "B"}
+TO_DIGIT = {"O": "0", "D": "0", "Q": "0", "I": "1", "L": "1", "Z": "2",
+            "S": "5", "G": "6", "B": "8"}
+PAN_CANDIDATE = re.compile(r"\b[A-Z0-9]{10}\b")
+
+
+def repair_pan(token: str) -> str:
+    fixed = ""
+    for i, ch in enumerate(token):
+        if i in (5, 6, 7, 8):          # these 4 positions must be digits
+            fixed += TO_DIGIT.get(ch, ch)
+        else:                          # the other 6 must be letters
+            fixed += TO_LETTER.get(ch, ch)
+    return fixed
+
+
 def find_pii(text: str):
     results = []
+
+    # PAN with OCR repair (an exact PAN is also found here, unchanged)
+    for m in PAN_CANDIDATE.finditer(text.upper()):
+        if PATTERNS["PAN"].fullmatch(repair_pan(m.group())):
+            results.append(("PAN", m.start(), m.end(), text[m.start():m.end()]))
+
     for label, pattern in PATTERNS.items():
+        if label == "PAN":
+            continue  # already handled above
         for m in pattern.finditer(text):
             value = m.group()
             if label == "AADHAAR" and AADHAAR_STRICT:
